@@ -9,7 +9,7 @@ ppm=$(chronyc tracking | grep Frequency | cut -d ":" -f 2 | cut -d " " -f 2)
 sign_correction=$(chronyc tracking | grep Frequency | cut -d ":" -f 2 | cut -d " " -f 4)
 
 echo "High accurate ppm = $ppm +/- $precision $sign_correction"
-if [ "$sign_correction" = "fast" ] ; then
+if [ "$sign_correction" = "slow" ] ; then
     xo=$(printf "%.0f" $(echo "scale=25; 40000000*(1-($ppm)/1000000)" | bc))
 else
     xo=$(printf "%.0f" $(echo "scale=25; 40000000*(1+($ppm)/1000000)" | bc))
